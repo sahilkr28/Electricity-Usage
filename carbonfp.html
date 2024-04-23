@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carbon Footprint Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+    }
+    .calculator {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    label {
+        font-weight: bold;
+    }
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    #result {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+    }
+</style>
+</head>
+<body>
+<div class="calculator">
+    <h2>Carbon Footprint Calculator</h2>
+    <label for="miles">Miles Driven per Year:</label>
+    <input type="number" id="miles" placeholder="Enter miles driven">
+    <label for="mpg">Average Miles per Gallon (MPG):</label>
+    <input type="number" id="mpg" placeholder="Enter MPG">
+    <label for="carbon">Carbon Emission Factor (kg CO2 per gallon):</label>
+    <input type="number" id="carbon" placeholder="Enter carbon emission factor">
+    <button onclick="calculate()">Calculate</button>
+    <div id="result"></div>
+</div>
+<script>
+    function calculate() {
+        var miles = parseFloat(document.getElementById("miles").value);
+        var mpg = parseFloat(document.getElementById("mpg").value);
+        var carbon = parseFloat(document.getElementById("carbon").value);
+        var resultElement = document.getElementById("result");
+        
+        if (isNaN(miles) || isNaN(mpg) || isNaN(carbon)) {
+            resultElement.textContent = "Please enter valid numbers.";
+        } else {
+            var emissions = (miles / mpg) * carbon;
+            resultElement.innerHTML = "<p><strong>Annual Carbon Footprint:</strong> " + emissions.toFixed(2) + " kg CO2</p>";
+        }
+    }
+</script>
+</body>
+</html>

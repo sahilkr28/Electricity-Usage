@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electricity Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+    }
+    .calculator {
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+<div class="calculator">
+    <h2>Electricity Calculator</h2>
+    <label for="power">Power Consumption (in kW):</label>
+    <input type="number" id="power" placeholder="Enter power consumption">
+    <label for="hours">Hours Used (per day):</label>
+    <input type="number" id="hours" placeholder="Enter hours used">
+    <button onclick="calculate()">Calculate</button>
+    <p id="result"></p>
+</div>
+<script>
+    function calculate() {
+        var power = parseFloat(document.getElementById("power").value);
+        var hours = parseFloat(document.getElementById("hours").value);
+        var resultElement = document.getElementById("result");
+        
+        if (isNaN(power) || isNaN(hours)) {
+            resultElement.textContent = "Please enter valid numbers.";
+        } else {
+            var energyConsumption = power * hours;
+            var costPerHour = 0.12; // Sample cost per kWh
+            var costPerDay = energyConsumption * costPerHour;
+            var costPerMonth = costPerDay * 30; // Assuming 30 days in a month
+
+            resultElement.innerHTML = "Energy Consumption: " + energyConsumption.toFixed(2) + " kWh<br>" +
+                                      "Cost Per Day: $" + costPerDay.toFixed(2) + "<br>" +
+                                      "Cost Per Month: $" + costPerMonth.toFixed(2);
+        }
+    }
+</script>
+</body>
+</html>
